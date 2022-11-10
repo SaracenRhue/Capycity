@@ -1,5 +1,7 @@
-enum Buildings {
-    WATERPOWER,
-    WINDPOWER,
-    SOLARPOWER,
+enum Buildings
+{
+    Empty,
+    Waterpower,
+    Windpower,
+    Solarpower,
 };
