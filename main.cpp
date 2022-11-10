@@ -3,7 +3,6 @@
 using std::cin;
 using std::cout;
 using std::endl;
-using std::string;
 
 void mainMenu();
 void buildingsMenu();
@@ -49,7 +48,7 @@ int main()
                 }
             }
             break;
-        case 2:
+        case 2: //add building
             buildingsMenu();
             cout << "Option: ";
             cin >> buildOpt;
@@ -70,7 +69,7 @@ int main()
                 break;
             }
             break;
-        case 3:
+        case 3: //remove building
             cout << "Enter x position" << endl;
             cin >> x;
             cout << "Enter y position" << endl;
