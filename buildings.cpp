@@ -1,5 +1,4 @@
-enum Buildings
-{
+enum Buildings {
     Empty,
     Waterpower,
     Windpower,
