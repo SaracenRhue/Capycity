@@ -30,7 +30,7 @@ int main() {
         switch (option) {
             ////////// reset map //////////
             case 1:  
-                cout << "Enter area width height" << endl;
+                cout << "Enter area width / height" << endl;
                 cin >> aWidth >> aHeight;
 
                 for (int a = 0; a < aWidth; a++) {
@@ -44,9 +44,9 @@ int main() {
                 buildingsMenu();
                 cout << "Option: ";
                 cin >> buildOpt;
-                cout << "Enter x y position" << endl;
+                cout << "Enter x / y position" << endl;
                 cin >> x >> y;
-                cout << "enter building width height" << endl;
+                cout << "enter building width / height" << endl;
                 cin >> width >> height;
 
                 Buildings selected;
