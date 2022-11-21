@@ -10,14 +10,16 @@ void buildingsMenu();
 void mapLegend();
 
 int main() {
-    int aWidth, aHeight, width, height, option, x, y, buildOpt;
-    cout << "Enter area width height" << endl;
-    cin >> aWidth >> aHeight;
+    int mapHeight, mapWidth, width, height, option, x, y, buildOpt;
+    bool overlap, outOfBounds;
 
-    Buildings area[aWidth][aHeight];
+    cout << "Enter area height width" << endl;
+    cin >> mapHeight >> mapWidth;
 
-    for (int a = 0; a < aWidth; a++) {
-        for (int b = 0; b < aHeight; b++) {
+    Buildings area[mapHeight][mapWidth];
+
+    for (int a = 0; a < mapHeight; a++) {
+        for (int b = 0; b < mapWidth; b++) {
             area[a][b] = Empty;
         }
     }
@@ -28,26 +30,15 @@ int main() {
         cin >> option;
 
         switch (option) {
-            ////////// reset map //////////
-            case 1:  
-                cout << "Enter area width / height" << endl;
-                cin >> aWidth >> aHeight;
-
-                for (int a = 0; a < aWidth; a++) {
-                    for (int b = 0; b < aHeight; b++) {
-                        area[a][b] = Empty;
-                    }
-                }
-                break;
             ////////// add building / clear area //////////
-            case 2:
+            case 1:
                 buildingsMenu();
                 cout << "Option: ";
                 cin >> buildOpt;
-                cout << "Enter x / y position" << endl;
-                cin >> x >> y;
-                cout << "enter building width / height" << endl;
-                cin >> width >> height;
+                cout << "Enter y / x position" << endl;
+                cin >> y >> x;
+                cout << "enter building height / width" << endl;
+                cin >> height >> width;
 
                 Buildings selected;
                 switch (buildOpt) {
@@ -64,24 +55,44 @@ int main() {
                         selected = Solarpower;
                         break;
                 }
+                // check vor corss section with outher buildings
+                for (int a = y; a < y + height; a++) {
+                    for (int b = x; b < x + width; b++) {
+                        if (area[a][b] != Empty){
+                            overlap = true;
+                        }
+                    }
+                }
+                // check for out of bounds
+                if (x + width > mapWidth || y + height > mapHeight) {
+                    outOfBounds = true;
+                }
 
-                for (int a = x; a < x + width; a++) {
-                    for (int b = y; b < y + height; b++) {
-                        area[a][b] = selected;
+                if (overlap) {
+                    cout << "Overlap detected" << endl;
+                }
+
+                if (outOfBounds) {
+                    cout << "Out of bounds" << endl;
+                } else {
+                    for (int a = y; a < y + height; a++) {
+                        for (int b = x; b < x + width; b++) {
+                            area[a][b] = selected;
+                        }
                     }
                 }
                 break;
             ////////// print map //////////
-            case 3:
-                for (int a = 0; a < aWidth; a++) {
-                    for (int b = 0; b < aHeight; b++) {
+            case 2:
+                for (int a = 0; a < mapHeight; a++) {
+                    for (int b = 0; b < mapWidth; b++) {
                         cout << area[a][b] << " ";
                     }
                     cout << endl;
                 }
                 break;
             ////////// map legend //////////
-            case 4:
+            case 3:
                 mapLegend();
         }
     } while (option != 0);
